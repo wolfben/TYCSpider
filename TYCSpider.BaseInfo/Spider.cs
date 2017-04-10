@@ -27,8 +27,8 @@ namespace TYCSpider.BaseInfo
         private void CompanyInfoHandle()
         {
             IWebDriver chromeDriver = new ChromeDriver();
-            chromeDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10000);//设置页面加载超时时间为10秒
-            chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3000);//设置查找元素不成功时，等待的时间
+            chromeDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);//设置页面加载超时时间为10秒
+            chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);//设置查找元素不成功时，等待的时间
 
             Random rd = new Random();
 
@@ -62,29 +62,41 @@ namespace TYCSpider.BaseInfo
                                 Console.WriteLine("获取基本信息公司法人：{0}", item.LegalPersonName);
                             }
 
-                            if (baseInfoElements[1] != null)
+                            if (baseInfoElements.Count > 1 && baseInfoElements[1] != null)
                             {
                                 item.RegisterMoney = baseInfoElements[1].Text;
                             }
 
-                            if (baseInfoElements[2] != null)
+                            if (baseInfoElements.Count > 2 && baseInfoElements[2] != null)
                             {
                                 item.RegisterDate = baseInfoElements[2].Text;
                             }
 
-                            if (baseInfoElements[3] != null)
+                            if (baseInfoElements.Count > 3 && baseInfoElements[3] != null)
                             {
                                 item.Status = baseInfoElements[3].Text;
                             }
                         }
 
-                        var baseInfoDetailElements = chromeDriver.FindElements(By.XPath("//td[contains(@class,'basic-td')]//span[1]"));
+                        var baseInfoDetailElements = chromeDriver.FindElements(By.XPath("//td[contains(@class,'basic-td')]//span[contains(@class,'ng-binding')]"));
                         if (baseInfoDetailElements != null && baseInfoDetailElements.Count > 0)
                         {
-                            item.CompanyType = baseInfoDetailElements[4].Text;
-                            item.OperationPeriod = baseInfoDetailElements[5].Text;
-                            item.Address = baseInfoDetailElements[8].Text;
-                            item.Scope = baseInfoDetailElements[9].Text;
+                            if (baseInfoDetailElements.Count > 3)
+                            {
+                                item.CompanyType = baseInfoDetailElements[3].Text;
+                            }
+                            if (baseInfoDetailElements.Count > 5)
+                            {
+                                item.OperationPeriod = baseInfoDetailElements[5].Text;
+                            }
+                            if (baseInfoDetailElements.Count > 8)
+                            {
+                                item.Address = baseInfoDetailElements[8].Text;
+                            }
+                            if (baseInfoDetailElements.Count > 9)
+                            {
+                                item.Scope = baseInfoDetailElements[9].Text;
+                            }
                         }
 
                         //进行更新操作

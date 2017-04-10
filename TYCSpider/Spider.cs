@@ -33,8 +33,8 @@ namespace TYCSpider
             PhantomJSDriverService pjsService = PhantomJSDriverService.CreateDefaultService();
             pjsService.LoadImages = false;
             var driver = new PhantomJSDriver(pjsService);
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10000);//设置页面加载超时时间为10秒
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3000);//设置查找元素不成功时，等待的时间
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(12);//设置页面加载超时时间为10秒
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);//设置查找元素不成功时，等待的时间
 
             Random rd = new Random();
 
@@ -42,7 +42,7 @@ namespace TYCSpider
             {
                 var companyList = new List<string>();
 
-                companyList.Add("好未来");
+                companyList.Add("浙江");
                 companyList.Add("华天酒店");
 
                 companyList = companyList.Where(p => Regex.IsMatch(p, @"^[a-zA-Z\s]+$") == false).ToList();//筛选不是全英文的公司名称
@@ -55,6 +55,7 @@ namespace TYCSpider
 
                     try
                     {
+                       
                         driver.Navigate().GoToUrl(url);
 
                         var firstElement = driver.FindElementByXPath("//div[@class='search_right_item']//a[contains(@class,'query_name')][1]");

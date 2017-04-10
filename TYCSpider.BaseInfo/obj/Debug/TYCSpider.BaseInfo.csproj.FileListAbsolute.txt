@@ -7,3 +7,12 @@ D:\工作\Demo\TYCSpider\TYCSpider.BaseInfo\obj\Debug\TYCSpider.BaseInfo.exe
 D:\工作\Demo\TYCSpider\TYCSpider.BaseInfo\obj\Debug\TYCSpider.BaseInfo.pdb
 D:\工作\Demo\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.dll
 D:\工作\Demo\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.xml
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\obj\Debug\TYCSpider.BaseInfo.exe
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\obj\Debug\TYCSpider.BaseInfo.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\TYCSpider.BaseInfo.exe
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\TYCSpider.BaseInfo.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\TYCSpider.Model.dll
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.dll
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\TYCSpider.Model.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.xml
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\obj\Debug\TYCSpider.BaseInfo.csprojResolveAssemblyReference.cache

@@ -2,3 +2,7 @@ D:\工作\Demo\TYCSpider\TYCSpider.Model\bin\Debug\TYCSpider.Model.dll
 D:\工作\Demo\TYCSpider\TYCSpider.Model\bin\Debug\TYCSpider.Model.pdb
 D:\工作\Demo\TYCSpider\TYCSpider.Model\obj\Debug\TYCSpider.Model.dll
 D:\工作\Demo\TYCSpider\TYCSpider.Model\obj\Debug\TYCSpider.Model.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider.Model\bin\Debug\TYCSpider.Model.dll
+D:\工作\GitProject\TYCSpider\TYCSpider.Model\bin\Debug\TYCSpider.Model.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider.Model\obj\Debug\TYCSpider.Model.dll
+D:\工作\GitProject\TYCSpider\TYCSpider.Model\obj\Debug\TYCSpider.Model.pdb
