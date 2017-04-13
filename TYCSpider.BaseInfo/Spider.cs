@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using TYCSpider.Model;
 using System.Threading;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace TYCSpider.BaseInfo
 {
@@ -27,8 +28,7 @@ namespace TYCSpider.BaseInfo
         private void CompanyInfoHandle()
         {
             IWebDriver chromeDriver = new ChromeDriver();
-            chromeDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);//设置页面加载超时时间为10秒
-            chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);//设置查找元素不成功时，等待的时间
+            WebDriverWait wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(5));//超过3秒将WebDriverTimeoutException异常
 
             Random rd = new Random();
 
@@ -52,13 +52,16 @@ namespace TYCSpider.BaseInfo
 
                         chromeDriver.Navigate().GoToUrl(item.TYCCompanyUrl);
 
-                        var baseInfoElements = chromeDriver.FindElements(By.XPath("//div[contains(@class,'baseinfo-module-content-value')]"));
+                        var baseInfoElements = wait.Until(p =>
+                        {
+                            return p.FindElements(By.XPath("//div[@class='baseInfo_model2017']//table[contains(@class,'companyInfo-table')]//tbody//td"));
+                        });
+
                         if (baseInfoElements != null && baseInfoElements.Count > 0)
                         {
-                            var baseInfoE1 = chromeDriver.FindElement(By.XPath("//div[contains(@class,'baseinfo-module-content-value')]//a[1]"));
-                            if (baseInfoE1 != null)
+                            if (baseInfoElements[0] != null)
                             {
-                                item.LegalPersonName = baseInfoE1.Text;
+                                item.LegalPersonName = baseInfoElements[0].Text.Replace("他的所有公司 >", "");
                                 Console.WriteLine("获取基本信息公司法人：{0}", item.LegalPersonName);
                             }
 
@@ -78,7 +81,10 @@ namespace TYCSpider.BaseInfo
                             }
                         }
 
-                        var baseInfoDetailElements = chromeDriver.FindElements(By.XPath("//td[contains(@class,'basic-td')]//span[contains(@class,'ng-binding')]"));
+                        var baseInfoDetailElements = wait.Until(p =>
+                        {
+                            return p.FindElements(By.XPath("//td[contains(@class,'basic-td')]//span[contains(@class,'ng-binding')]"));
+                        });
                         if (baseInfoDetailElements != null && baseInfoDetailElements.Count > 0)
                         {
                             if (baseInfoDetailElements.Count > 3)

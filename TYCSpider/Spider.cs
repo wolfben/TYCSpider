@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using TYCSpider.Model;
 using System.Threading;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace TYCSpider
 {
@@ -22,19 +23,16 @@ namespace TYCSpider
 
         public void Run()
         {
-            Thread detailThread = new Thread(CompanyDetailHandle);
-            detailThread.Start();
+            //Thread detailThread = new Thread(CompanyDetailHandle);
+            //detailThread.Start();
 
             CompanyInfoHandle();
         }
 
         private void CompanyInfoHandle()
         {
-            PhantomJSDriverService pjsService = PhantomJSDriverService.CreateDefaultService();
-            pjsService.LoadImages = false;
-            var driver = new PhantomJSDriver(pjsService);
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(12);//设置页面加载超时时间为10秒
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);//设置查找元素不成功时，等待的时间
+            var driver = new ChromeDriver();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));//超过3秒将WebDriverTimeoutException异常
 
             Random rd = new Random();
 
@@ -42,7 +40,7 @@ namespace TYCSpider
             {
                 var companyList = new List<string>();
 
-                companyList.Add("浙江");
+                companyList.Add("广州万隆");
                 companyList.Add("华天酒店");
 
                 companyList = companyList.Where(p => Regex.IsMatch(p, @"^[a-zA-Z\s]+$") == false).ToList();//筛选不是全英文的公司名称
@@ -55,10 +53,14 @@ namespace TYCSpider
 
                     try
                     {
-                       
+
                         driver.Navigate().GoToUrl(url);
 
-                        var firstElement = driver.FindElementByXPath("//div[@class='search_right_item']//a[contains(@class,'query_name')][1]");
+                        var firstElement = wait.Until(p =>
+                        {
+                            return p.FindElement(By.XPath("//div[@class='search_right_item']//a[contains(@class,'query_name')][1]"));
+                        });
+
                         if (firstElement == null)
                         {
                             Console.WriteLine("获取元素失败");
@@ -83,11 +85,11 @@ namespace TYCSpider
                             };
 
                             //加入队列
-                            queueCompanyList.Enqueue(companyInfo);                       
+                            queueCompanyList.Enqueue(companyInfo);
                         }
 
                     }
-                    catch(WebDriverTimeoutException ex)
+                    catch (WebDriverTimeoutException ex)
                     {
                         //超时日志不记录
                     }
@@ -104,7 +106,6 @@ namespace TYCSpider
         {
             HttpItem httpItem = new HttpItem { };
             var httpHelper = new HttpHelper();
-            var driver = new PhantomJSDriver();
             while (true)
             {
                 if (queueCompanyList != null && queueCompanyList.Count > 0)

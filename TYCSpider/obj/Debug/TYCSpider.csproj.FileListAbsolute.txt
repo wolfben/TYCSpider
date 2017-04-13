@@ -26,3 +26,9 @@ D:\工作\GitProject\TYCSpider\TYCSpider\bin\Debug\HtmlAgilityPack.xml
 D:\工作\GitProject\TYCSpider\TYCSpider\bin\Debug\Newtonsoft.Json.xml
 D:\工作\GitProject\TYCSpider\TYCSpider\bin\Debug\WebDriver.xml
 D:\工作\GitProject\TYCSpider\TYCSpider\obj\Debug\TYCSpider.csprojResolveAssemblyReference.cache
+D:\工作\GitProject\TYCSpider\TYCSpider\bin\Debug\Selenium.WebDriverBackedSelenium.dll
+D:\工作\GitProject\TYCSpider\TYCSpider\bin\Debug\WebDriver.Support.dll
+D:\工作\GitProject\TYCSpider\TYCSpider\bin\Debug\Selenium.WebDriverBackedSelenium.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider\bin\Debug\Selenium.WebDriverBackedSelenium.xml
+D:\工作\GitProject\TYCSpider\TYCSpider\bin\Debug\WebDriver.Support.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider\bin\Debug\WebDriver.Support.xml

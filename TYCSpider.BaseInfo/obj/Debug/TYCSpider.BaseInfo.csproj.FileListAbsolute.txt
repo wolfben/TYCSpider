@@ -16,3 +16,10 @@ D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.dll
 D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\TYCSpider.Model.pdb
 D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.xml
 D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\obj\Debug\TYCSpider.BaseInfo.csprojResolveAssemblyReference.cache
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\Selenium.WebDriverBackedSelenium.dll
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.Support.dll
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\Selenium.WebDriverBackedSelenium.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\Selenium.WebDriverBackedSelenium.xml
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.Support.pdb
+D:\工作\GitProject\TYCSpider\TYCSpider.BaseInfo\bin\Debug\WebDriver.Support.xml
