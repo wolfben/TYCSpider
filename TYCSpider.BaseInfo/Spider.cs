@@ -35,12 +35,14 @@ namespace TYCSpider.BaseInfo
             while (true)
             {
                 //此处获取公司列表信息
-                var companyList = new List<CompanyBasicInfo>();
-
-                companyList.Add(new CompanyBasicInfo
-                {
-                    TYCCompanyUrl = "http://www.tianyancha.com/company/24690101"
-                });
+                var companyList = new List<CompanyBasicInfo>() {
+                    new CompanyBasicInfo {TYCCompanyUrl="http://www.tianyancha.com/company/588162" },
+                     new CompanyBasicInfo {TYCCompanyUrl="http://www.tianyancha.com/company/26079830" },
+                      new CompanyBasicInfo {TYCCompanyUrl="http://www.tianyancha.com/company/18608846" },
+                       new CompanyBasicInfo {TYCCompanyUrl="http://www.tianyancha.com/company/1341875964" },
+                        new CompanyBasicInfo {TYCCompanyUrl="http://www.tianyancha.com/company/3025062912" },
+                      new CompanyBasicInfo {TYCCompanyUrl="http://www.tianyancha.com/company/3019250186" },
+                };
 
                 foreach (var item in companyList)
                 {
@@ -52,16 +54,16 @@ namespace TYCSpider.BaseInfo
 
                         chromeDriver.Navigate().GoToUrl(item.TYCCompanyUrl);
 
-                        var baseInfoElements = wait.Until(p =>
-                        {
-                            return p.FindElements(By.XPath("//div[@class='baseInfo_model2017']//table[contains(@class,'companyInfo-table')]//tbody//td"));
-                        });
+                        //该方式能够比较精准判断是否加载完成
+                        var c = wait.Until(ExpectedConditions.ElementExists(By.XPath("//div[@class='baseInfo_model2017']//table[contains(@class,'companyInfo-table')]//tbody//td")));
+
+                        var baseInfoElements = chromeDriver.FindElements(By.XPath("//div[@class='baseInfo_model2017']//table[contains(@class,'companyInfo-table')]//tbody//td"));
 
                         if (baseInfoElements != null && baseInfoElements.Count > 0)
                         {
                             if (baseInfoElements[0] != null)
                             {
-                                item.LegalPersonName = baseInfoElements[0].Text.Replace("他的所有公司 >", "");
+                                item.LegalPersonName = baseInfoElements[0].Text.Replace("他的所有公司 >", "").Trim();
                                 Console.WriteLine("获取基本信息公司法人：{0}", item.LegalPersonName);
                             }
 
@@ -70,21 +72,23 @@ namespace TYCSpider.BaseInfo
                                 item.RegisterMoney = baseInfoElements[1].Text;
                             }
 
-                            if (baseInfoElements.Count > 2 && baseInfoElements[2] != null)
+                            if (baseInfoElements.Count > 1 && baseInfoElements[2] != null)
                             {
                                 item.RegisterDate = baseInfoElements[2].Text;
                             }
 
-                            if (baseInfoElements.Count > 3 && baseInfoElements[3] != null)
+                            if (baseInfoElements.Count > 2 && baseInfoElements[3] != null)
                             {
                                 item.Status = baseInfoElements[3].Text;
                             }
                         }
 
-                        var baseInfoDetailElements = wait.Until(p =>
+                        var c2 = wait.Until(p =>
                         {
-                            return p.FindElements(By.XPath("//td[contains(@class,'basic-td')]//span[contains(@class,'ng-binding')]"));
+                            return p.FindElements(By.XPath("//td[contains(@class,'basic-td')]//span[contains(@class,'ng-binding')]")).Count > 0;
                         });
+
+                        var baseInfoDetailElements = chromeDriver.FindElements(By.XPath("//td[contains(@class,'basic-td')]//span[contains(@class,'ng-binding')]"));
                         if (baseInfoDetailElements != null && baseInfoDetailElements.Count > 0)
                         {
                             if (baseInfoDetailElements.Count > 3)
@@ -105,6 +109,13 @@ namespace TYCSpider.BaseInfo
                             }
                         }
 
+                        if (string.IsNullOrEmpty(item.LegalPersonName) && string.IsNullOrEmpty(item.RegisterDate))
+                        {
+                            Console.WriteLine("{0}的基本信息为空", item.TYCCompanyUrl);
+                        }
+
+                        Thread.Sleep(3000);
+
                         //进行更新操作
 
                         #endregion
@@ -113,6 +124,10 @@ namespace TYCSpider.BaseInfo
                     catch (WebDriverTimeoutException ex)
                     {
                         //超时日志不记录
+                    }
+                    catch (WebDriverException ex)
+                    {
+                        //记录日志
                     }
                     catch (Exception ex)
                     {

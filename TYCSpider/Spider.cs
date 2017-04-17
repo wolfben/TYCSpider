@@ -56,10 +56,10 @@ namespace TYCSpider
 
                         driver.Navigate().GoToUrl(url);
 
-                        var firstElement = wait.Until(p =>
-                        {
-                            return p.FindElement(By.XPath("//div[@class='search_right_item']//a[contains(@class,'query_name')][1]"));
-                        });
+                        //该方式能够比较精准判断是否加载完成
+                        var c1 = wait.Until(ExpectedConditions.ElementExists(By.XPath("//div[@class='search_right_item']//a[contains(@class,'query_name')][1]")));
+
+                        var firstElement = driver.FindElement(By.XPath("//div[@class='search_right_item']//a[contains(@class,'query_name')][1]"));
 
                         if (firstElement == null)
                         {
@@ -92,6 +92,10 @@ namespace TYCSpider
                     catch (WebDriverTimeoutException ex)
                     {
                         //超时日志不记录
+                    }
+                    catch(WebDriverException ex)
+                    {
+                        //记录日志
                     }
                     catch (Exception ex)
                     {
